@@ -5,9 +5,9 @@ COPY package.json package-lock.json ./
 RUN npm clean-install
 
 COPY . .
-RUN bun run build
+RUN npm run build
 
 ENV PORT=3000
 EXPOSE $PORT
 
-CMD ["bun", "start"]
+CMD ["npm", "start"]
