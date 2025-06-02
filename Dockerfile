@@ -1,19 +1,37 @@
-FROM node:22.14.0-alpine
+# Etapa de build
+FROM node:20-alpine AS builder
 
-RUN apt update
-RUN apt install curl bash -y
-RUN curl -fsSL https://bun.sh/install | bash
-RUN npm i -g bun
+# Cria o diretório de trabalho
+WORKDIR /app
 
-WORKDIR /var/www
+# Copia o package.json e o package-lock.json (ou yarn.lock / pnpm-lock.yaml)
+COPY package*.json ./
 
+# Instala as dependências
+RUN npm install
+
+# Copia todo o código para o container
 COPY . .
 
-RUN bun install --frozen-lockfile
+# Compila o TypeScript (se tiver script "build")
+RUN npm run build
 
-RUN bun run build
+# Etapa final
+FROM node:20-alpine
 
-ENV PORT=3000
-EXPOSE $PORT
+WORKDIR /app
 
-CMD ["bun", "start"]
+# Copia apenas o necessário para rodar
+COPY package*.json ./
+
+# Instala apenas as dependências de produção
+RUN npm clean-install
+
+# Copia o build gerado e outras partes importantes
+COPY --from=builder /app/.env ./ # caso precise de um .env (opcional)
+
+# Inicia a aplicação
+CMD ["npm", "run", "start"]
+
+# Expõe a porta que a aplicação usa
+EXPOSE 3333

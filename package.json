@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch api/services/server.ts",
     "build": "tsup api/services/server.ts",
-    "start": "node dist/server.js"
+    "start": "tsx api/services/server.ts"
   },
   "dependencies": {
     "@fastify/cors": "^8.3.0",
