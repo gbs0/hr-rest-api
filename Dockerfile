@@ -12,4 +12,4 @@ RUN bun db:generate
 
 EXPOSE 3333
 
-CMD [ "bun", "start:service-controller" ]
+CMD [ "bun", "start:service" ]
