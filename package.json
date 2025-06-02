@@ -2,10 +2,10 @@
   "name": "hr-rest-api",
   "version": "1.0.0",
   "description": "API RESTful para cadastro de usuários",
-  "main": "app/services/server.ts",
+  "main": "api/services/server.ts",
   "scripts": {
-    "dev": "tsx watch app/services/server.ts",
-    "build": "tsup app/services/server.ts",
+    "dev": "tsx watch api/services/server.ts",
+    "build": "tsup api/services/server.ts",
     "start": "node dist/server.js"
   },
   "dependencies": {
