@@ -4,9 +4,8 @@
   "description": "API RESTful para cadastro de usuários",
   "main": "api/services/server.ts",
   "scripts": {
-    "dev": "tsx watch api/services/server.ts",
-    "build": "tsup api/services/server.ts",
-    "start": "tsx api/services/server.ts"
+    "dev": "tsx watch api /services/server.ts",
+    "start:service": "bun api/services/server.ts"
   },
   "dependencies": {
     "@fastify/cors": "^8.3.0",
